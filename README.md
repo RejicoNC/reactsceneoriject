@@ -1,1 +1,1 @@
-# reactsceneoriject
+This project was made in class, we had to make a scene using 3D models on React

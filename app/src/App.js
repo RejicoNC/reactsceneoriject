@@ -1,11 +1,13 @@
 import React, { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, ContactShadows } from '@react-three/drei';
+import { EffectComposer, Bloom, Glitch } from '@react-three/postprocessing';
 
 // Components 3D
 import Model from './components/3d/Model';
 import AnimatedModel from './components/3d/AnimatedModel';
 import Ground from './components/3d/Ground';
+import NeonText from './components/3d/NeonText';
 import LoadingScreen from './components/ui/LoadingScreen';
 
 function App() {
@@ -157,6 +159,12 @@ function App() {
             autoPlay={true} // 🎯 MODIFIABLE: Animation automatique activée
             // animationName supprimé pour utiliser la première animation disponible
           />
+          
+          {/* ✨ TEXTE NÉON DANS LE CIEL */}
+          <NeonText 
+            text="RejicoNC - BUT MMI"
+            position={[0, 20, -25]}
+          />
         </Suspense>
         
         {/* Ombres au sol - MODIFIABLE - AMBIANCE NOCTURNE AMÉLIORÉE */}
@@ -169,6 +177,30 @@ function App() {
           color="#000000" // 🎯 MODIFIABLE: Ombres noires pour la nuit
           resolution={1024} // 🎯 MODIFIABLE: Qualité des ombres
         />
+        
+        {/* 🌟 EFFETS DE POST-PROCESSING POUR VRAIS EFFETS NÉON */}
+        <EffectComposer multisampling={0}>
+          {/* Effet Bloom MODÉRÉ pour les halos néon */}
+          <Bloom
+            intensity={0.8} // 🎯 Intensité réduite pour lisibilité
+            kernelSize={2} // 🎯 Taille réduite
+            luminanceThreshold={0.3} // 🎯 Seuil plus élevé pour moins d'effet
+            luminanceSmoothing={0.6} // 🎯 Lissage augmenté
+            mipmapBlur={true}
+          />
+          
+          {/* Effet Glitch très subtil pour ambiance cyberpunk */}
+          <Glitch
+            delay={[15, 25]} // 🎯 Délai plus long entre les glitchs
+            duration={[0.05, 0.15]} // 🎯 Durée plus courte
+            strength={[0.1, 0.2]} // 🎯 Force très réduite
+            mode={0}
+            active
+            ratio={0.9} // 🎯 Ratio plus élevé
+          />
+          
+          {/* ChromaticAberration SUPPRIMÉ - causait le texte bleu */}
+        </EffectComposer>
       </Canvas>
     </div>
   );

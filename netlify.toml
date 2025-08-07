@@ -1,0 +1,9 @@
+[build]
+base = "app"            # ou commente cette ligne si tu veux le Choix B
+command = "npm ci && npm run build"
+publish = "build"       # "build" si base="app", sinon "app/build"
+
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200

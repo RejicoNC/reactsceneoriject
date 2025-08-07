@@ -1,1 +1,1 @@
-This project was made in class, we had to make a scene using 3D models on React. I used AI to help me for this project and manage ideas
+This project was made in class, we had to make a scene using 3D models on React. I used AI to help me for this project
